@@ -8,17 +8,41 @@
 
 import SwiftUI
 let platformList = ["iOS","macOS","watchOS"]
+let colorList:[Color] = [
+  .black,
+  .white,
+  .gray,
+  .red,
+  .green,
+  .blue,
+  .orange,
+  .yellow,
+  .pink,
+  .purple,
+  .primary,
+  .secondary,
+]
 
 struct ContentView: View {
-  @State var text:String = ""
+  @State var text:String = "you title"
   @State var fileName = ""
   @State var picked = platformList.first!
+  @State var bgcolor: Color = colorList.first!
+  @State var fgcolor: Color = colorList[1]
   var body: some View {
     HStack(spacing: 10) {
+      Text(text)
+        .font(.caption)
+        .frame(width: 100,height: 100)
+        .foregroundColor(fgcolor)
+        .background(bgcolor)
+      
       VStack(alignment:.trailing, spacing: 10){
         Text("text")
         Text("File Name")
         Text("Platform")
+        Text("BColor")
+        Text("FColor")
       }.padding()
       VStack(spacing: 10) {
         TextField("", text: $text)
@@ -26,6 +50,16 @@ struct ContentView: View {
         Picker(selection: $picked, label: Text("")) {
           ForEach(platformList, id: \.self) {
             Text("\($0)")
+          }
+        }.labelsHidden()
+        Picker(selection: $bgcolor, label: Text("")) {
+          ForEach(colorList, id: \.self) { color in
+            return Text(color.description)
+          }
+        }.labelsHidden()
+        Picker(selection: $fgcolor, label: Text("")) {
+          ForEach(colorList, id: \.self) { color in
+            return Text(color.description)
           }
         }.labelsHidden()
       }
