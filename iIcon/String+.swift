@@ -20,8 +20,6 @@ struct FontGetter {
     for i in min...max {
       let strSize = string
         .size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: CGFloat(i))])
-      //      let linesNumber = Int(size.height/strSize.height)
-      print(i,size.width,strSize.width)
       if standard < strSize.height {
         return CGFloat(i-1)
       }
