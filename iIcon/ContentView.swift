@@ -31,33 +31,38 @@ struct ContentView: View {
   @State var fgcolor: Color = colorList[1]
   var body: some View {
     HStack(spacing: 10) {
-    Icon($text, fg: $fgcolor, bg: $bgcolor)
-      
-      VStack(alignment:.trailing, spacing: 10){
-        Label("text")
-        Label("File Name")
-        Label("Platform")
-        Label("BColor")
-        Label("FColor")
-      }.padding()
-      VStack(spacing: 10) {
-        TextField("", text: $text)
-        TextField("optional", text: $fileName)
-        Picker(selection: $picked, label: Text("")) {
-          ForEach(platformList, id: \.self) {
-            Text("\($0)")
-          }
-        }.labelsHidden()
-        Picker(selection: $bgcolor, label: Text("")) {
-          ForEach(colorList, id: \.self) { color in
-            return Text(color.description)
-          }
-        }.labelsHidden()
-        Picker(selection: $fgcolor, label: Text("")) {
-          ForEach(colorList, id: \.self) { color in
-            return Text(color.description)
-          }
-        }.labelsHidden()
+      Icon($text, fg: $fgcolor, bg: $bgcolor)
+      VStack {
+        Row("text"){
+          TextField("", text: $text)
+        }
+        
+        Row("File Name") {
+          TextField("optional", text: $fileName)
+        }
+        Row("Platform") {
+          Picker(selection: $picked, label: Text("")) {
+            ForEach(platformList, id: \.self) {
+              Text("\($0)")
+            }
+          }.labelsHidden()
+        }
+        Row("BColor") {
+          
+          Picker(selection: $bgcolor, label: Text("")) {
+            ForEach(colorList, id: \.self) { color in
+              return Text(color.description)
+            }
+          }.labelsHidden()
+          
+        }
+        Row("FColor") {
+          Picker(selection: $fgcolor, label: Text("")) {
+            ForEach(colorList, id: \.self) { color in
+              return Text(color.description)
+            }
+          }.labelsHidden()
+        }
       }
     }
     .padding()
@@ -71,3 +76,4 @@ struct ContentView_Previews: PreviewProvider {
     ContentView()
   }
 }
+
