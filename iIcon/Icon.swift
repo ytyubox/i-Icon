@@ -20,18 +20,26 @@ struct Icon:View {
   @Binding var fgcolor: Color
   @Binding var bgcolor: Color
   let basicFontSize: CGFloat = 30
+  
+  @State private var imageUrls: [Int: URL] = [:]
+  @State private var active = 0
+  
   var lineLayer :CGFloat {CGFloat(text.filter{$0 == "\n"}.count) }
+  
   var body: some View {
+    let dropDelegate = MyDropDelegate(imageUrls: $imageUrls, active: $active)
     
-    GeometryReader{g in
-      
-      Text(self.text)
-        
-        .frame(width: g.size.width,height: g.size.width)
-        .font(FontGetter(text: self.text).font(in: g.size))
-        .foregroundColor(self.fgcolor)
-        .background(self.bgcolor)
-        .cornerRadius(25)
+    return  GeometryReader{g in
+      ZStack {
+        GridCell(active: true, url: self.imageUrls[0])
+        Text(self.text)
+          .frame(width: g.size.width,height: g.size.width)
+          .font(FontGetter(text: self.text).font(in: g.size))
+          .foregroundColor(self.fgcolor)
+          .background(self.bgcolor)
+          .cornerRadius(25)
+          .onDrop(of: ["public.file-url"], delegate: dropDelegate)
+      }
     }
   }
 }
@@ -43,5 +51,19 @@ struct Icon_Previews: PreviewProvider {
   }
 }
 
-
-
+struct GridCell: View {
+  let active: Bool
+  let url: URL?
+  
+  var body: some View {
+    let img = Image(nsImage: url != nil ? NSImage(byReferencing: url!) : NSImage())
+      .resizable()
+    .scaledToFit()
+      .frame(width: 100, height: 100)
+    
+    return Rectangle()
+      .fill(self.active ? Color.green : Color.clear)
+      .frame(width: 100, height: 100)
+      .overlay(img)
+  }
+}

@@ -21,6 +21,7 @@ let colorList:[Color] = [
   .purple,
   .primary,
   .secondary,
+  .clear,
 ]
 
 struct ContentView: View {
@@ -31,7 +32,7 @@ struct ContentView: View {
   @State var fgcolor: Color = colorList[1]
   var body: some View {
     HStack(spacing: 10) {
-    Icon($text, fg: $fgcolor, bg: $bgcolor)
+      Icon($text, fg: $fgcolor, bg: $bgcolor)
       
       VStack(alignment:.trailing, spacing: 10){
         Label("text")
