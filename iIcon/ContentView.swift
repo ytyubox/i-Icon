@@ -37,11 +37,11 @@ struct ContentView: View {
         .background(bgcolor)
       
       VStack(alignment:.trailing, spacing: 10){
-        Text("text")
-        Text("File Name")
-        Text("Platform")
-        Text("BColor")
-        Text("FColor")
+        Label("text")
+        Label("File Name")
+        Label("Platform")
+        Label("BColor")
+        Label("FColor")
       }.padding()
       VStack(spacing: 10) {
         TextField("", text: $text)
