@@ -32,7 +32,6 @@ struct ContentView: View {
   var body: some View {
     HStack(spacing: 10) {
       Text(text)
-        .font(.caption)
         .frame(width: 100,height: 100)
         .foregroundColor(fgcolor)
         .background(bgcolor)
