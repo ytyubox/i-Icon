@@ -9,6 +9,7 @@
 import SwiftUI
 let platformList = ["iOS","macOS","watchOS"]
 let colorList:[Color] = [
+  .clear,
   .black,
   .white,
   .gray,
@@ -21,7 +22,6 @@ let colorList:[Color] = [
   .purple,
   .primary,
   .secondary,
-  .clear,
 ]
 
 struct ContentView: View {

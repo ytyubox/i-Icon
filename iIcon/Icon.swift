@@ -32,13 +32,14 @@ struct Icon:View {
     return  GeometryReader{g in
       ZStack {
         GridCell(active: true, url: self.imageUrls[0])
+          .frame(width: g.size.width, height: g.size.width)
         Text(self.text)
           .frame(width: g.size.width,height: g.size.width)
           .font(FontGetter(text: self.text).font(in: g.size))
+          .onDrop(of: ["public.file-url"], delegate: dropDelegate)
           .foregroundColor(self.fgcolor)
           .background(self.bgcolor)
           .cornerRadius(25)
-          .onDrop(of: ["public.file-url"], delegate: dropDelegate)
       }
     }
   }
@@ -58,12 +59,12 @@ struct GridCell: View {
   var body: some View {
     let img = Image(nsImage: url != nil ? NSImage(byReferencing: url!) : NSImage())
       .resizable()
-    .scaledToFit()
-      .frame(width: 100, height: 100)
+    .scaledToFill()
+//      .frame(width: 100, height: 100)
     
     return Rectangle()
-      .fill(self.active ? Color.green : Color.clear)
-      .frame(width: 100, height: 100)
+//      .fill(self.active ? Color.green : Color.clear)
+//      .frame(width: 100, height: 100)
       .overlay(img)
   }
 }
