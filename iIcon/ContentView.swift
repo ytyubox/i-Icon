@@ -31,10 +31,7 @@ struct ContentView: View {
   @State var fgcolor: Color = colorList[1]
   var body: some View {
     HStack(spacing: 10) {
-      Text(text)
-        .frame(width: 100,height: 100)
-        .foregroundColor(fgcolor)
-        .background(bgcolor)
+    Icon($text, fg: $fgcolor, bg: $bgcolor)
       
       VStack(alignment:.trailing, spacing: 10){
         Label("text")
