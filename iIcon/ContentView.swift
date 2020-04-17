@@ -21,6 +21,7 @@ let colorList:[Color] = [
   .purple,
   .primary,
   .secondary,
+  .clear,
 ]
 
 struct ContentView: View {
